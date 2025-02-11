@@ -1,36 +1,38 @@
 import SwiftUI
 
 struct PropertiesView: View {
-    @State
-    private var selectedPanel: Panel = .colorSwitcher
+    @State private var activePanel = Panel.backgroundColor
     
     var body: some View {
         VStack(spacing: 15) {
-            segmentedControlView
+            SegmentedControlView(
+                panels: Panel.allCases,
+                activePanel: $activePanel,
+                activeTint: .black,
+                inActiveTint: Color.secondary.opacity(0.7)
+            ) { size in
+                Capsule()
+                    .fill(Color.yellow)
+                    .frame(height: size.height)
+                    .padding(.horizontal, 0)
+                    .frame(maxWidth: .infinity, alignment: .bottom)
+            }
             
-            SegmentedControlSectionView(selectedPanel)
+            PanelView()
+            
+            Spacer(minLength: 0)
         }
         .padding(.horizontal)
     }
     
-    private var segmentedControlView: some View {
-        Picker("", selection: $selectedPanel) {
-            ForEach(Panel.allCases, id: \.self) {
-                Text($0.rawValue)
-            }
-        }
-        .pickerStyle(.segmented)
-        .labelsHidden()
-    }
-    
     @ViewBuilder
-    private func SegmentedControlSectionView(_ panel: Panel) -> some View {
-        switch panel {
-        case .colorSwitcher:
+    private func PanelView() -> some View {
+        switch activePanel {
+        case .backgroundColor:
             BackgroundSelectorView()
-        case .iconSwitcher:
+        case .icon:
             IconPickerView()
-        case .additional:
+        case .others:
             ImagePropertiesView()
         }
     }
@@ -38,5 +40,5 @@ struct PropertiesView: View {
 
 #Preview {
     PropertiesView()
-        .frame(width: 300, height: 300)
+    
 }
