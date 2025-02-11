@@ -12,6 +12,8 @@ final class ContentViewModel: ObservableObject {
     @Published
     var backgroundColor: Color = .blue
     @Published
+    var linearGradient: LinearGradient?
+    @Published
     var hasGradient: Bool = false
     @Published
     var hasInnerShadow: Bool = false

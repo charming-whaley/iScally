@@ -3,7 +3,7 @@ import SwiftUI
 struct IconPickerView: View {
     var body: some View {
         VStack {
-            Text("Icons")
+            Text("Top Layer")
                 .font(.largeTitle)
                 .fontWeight(.black)
                 .foregroundStyle(.white)

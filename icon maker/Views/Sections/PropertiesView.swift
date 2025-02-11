@@ -4,7 +4,7 @@ struct PropertiesView: View {
     @State private var activePanel = Panel.backgroundColor
     
     var body: some View {
-        VStack(spacing: 15) {
+        VStack(spacing: 30) {
             SegmentedControlView(
                 panels: Panel.allCases,
                 activePanel: $activePanel,
@@ -23,6 +23,7 @@ struct PropertiesView: View {
             Spacer(minLength: 0)
         }
         .padding(.horizontal)
+        .background(Color.black)
     }
     
     @ViewBuilder

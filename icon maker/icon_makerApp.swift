@@ -12,7 +12,6 @@ struct icon_makerApp: App {
                         }
                     }
                 }
-                .background(Color.black)
         }
         .defaultSize(width: 1280, height: 720)
         .windowResizability(.contentSize)
