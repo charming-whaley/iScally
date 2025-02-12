@@ -9,7 +9,7 @@ struct BackgroundColorBlockView: View {
     
     var body: some View {
         RoundedRectangle(cornerRadius: 20)
-            .fill(fillColor)
+            .fill(fillColor.gradient)
             .frame(height: 130)
             .frame(maxWidth: .infinity)
     }
