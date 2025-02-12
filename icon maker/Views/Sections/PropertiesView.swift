@@ -17,12 +17,10 @@ struct PropertiesView: View {
                     .padding(.horizontal, 0)
                     .frame(maxWidth: .infinity, alignment: .bottom)
             }
+            .padding(.horizontal)
             
             PanelView()
-            
-            Spacer(minLength: 0)
         }
-        .padding(.horizontal)
         .background(Color.black)
     }
     
@@ -35,6 +33,7 @@ struct PropertiesView: View {
             IconPickerView()
         case .others:
             ImagePropertiesView()
+                .padding(.horizontal)
         }
     }
 }
