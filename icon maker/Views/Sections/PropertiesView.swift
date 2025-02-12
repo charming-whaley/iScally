@@ -1,9 +1,9 @@
 import SwiftUI
 
-struct PropertiesView: View {
+public struct PropertiesView: View {
     @State private var activePanel = Panel.backgroundColor
     
-    var body: some View {
+    public var body: some View {
         VStack(spacing: 30) {
             SegmentedControlView(
                 panels: Panel.allCases,

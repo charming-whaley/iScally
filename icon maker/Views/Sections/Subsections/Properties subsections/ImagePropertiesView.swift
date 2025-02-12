@@ -1,7 +1,7 @@
 import SwiftUI
  
-struct ImagePropertiesView: View {
-    var body: some View {
+public struct ImagePropertiesView: View {
+    public var body: some View {
         VStack(alignment: .leading) {
             Text("Additional")
                 .font(.largeTitle)

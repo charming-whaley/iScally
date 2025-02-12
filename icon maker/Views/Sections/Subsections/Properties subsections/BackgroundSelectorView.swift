@@ -1,19 +1,25 @@
 import SwiftUI
 
-struct BackgroundSelectorView: View {
+public struct BackgroundSelectorView: View {
     private let columns = Array(repeating: GridItem(.fixed(130), spacing: 15), count: 2)
     
     @State private var selectedTab: Color = .red
     @State private var customColor = ""
     @State private var showErrorAlert = false
+    @State private var switcher = false
     
-    var body: some View {
-        VStack(alignment: .leading) {
+    public var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
             Text("Background")
                 .font(.largeTitle)
                 .fontWeight(.black)
                 .foregroundStyle(.white)
                 .padding(.leading)
+                .padding(.bottom, 14)
+            
+            CheckerView(switcher: $switcher, title: "Add gradient")
+                .padding(.horizontal)
+                .padding(.bottom, 15)
             
             CustomColorBlockView()
             

@@ -1,13 +1,13 @@
 import SwiftUI
 
-struct DownloadButtonView: View {
+public struct DownloadButtonView: View {
     let action: () async -> Void
     
     init(_ action: @escaping () async -> Void) {
         self.action = action
     }
     
-    var body: some View {
+    public var body: some View {
         Button {
             Task { @MainActor in
                 await action()

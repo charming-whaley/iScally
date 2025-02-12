@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct IconPickerView: View {
-    var body: some View {
+public struct IconPickerView: View {
+    public var body: some View {
         VStack {
             Text("Top Layer")
                 .font(.largeTitle)

@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct EditorView: View {
-    var body: some View {
+public struct EditorView: View {
+    public var body: some View {
         VStack {
             HStack {
                 

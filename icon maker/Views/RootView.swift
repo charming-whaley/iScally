@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct RootView: View {
-    var body: some View {
+public struct RootView: View {
+    public var body: some View {
         HStack(spacing: 0) {
             EditorView()
                 .frame(width: 1280 * 3 / 4)

@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct SegmentedControlView<Indicator>: View where Indicator: View {
+public struct SegmentedControlView<Indicator>: View where Indicator: View {
     var panels: [Panel]
     @Binding var activePanel: Panel
     var height: CGFloat = 35
@@ -14,7 +14,7 @@ struct SegmentedControlView<Indicator>: View where Indicator: View {
     @State private var excessed: CGFloat = .zero
     @State private var minX: CGFloat = .zero
     
-    var body: some View {
+    public var body: some View {
         GeometryReader {
             let size = $0.size
             let containerWidth = size.width / CGFloat(panels.count)
