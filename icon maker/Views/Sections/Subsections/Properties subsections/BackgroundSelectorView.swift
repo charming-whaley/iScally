@@ -14,19 +14,7 @@ struct BackgroundSelectorView: View {
                 .foregroundStyle(.white)
                 .padding(.leading)
             
-            TextField("Your hex color...", text: $customColor)
-                .textFieldStyle(.plain)
-                .padding(.horizontal)
-                .font(.headline)
-                .foregroundStyle(.white)
-                .padding(.vertical, 12)
-                .frame(maxWidth: .infinity)
-                .background {
-                    RoundedRectangle(cornerRadius: 15)
-                        .fill(.editorBackground)
-                }
-                .padding(.horizontal)
-                .padding(.bottom, 10)
+            CustomColorBlockView()
             
             ScrollView(.vertical) {
                 LazyVGrid(columns: columns, spacing: 15) {
@@ -59,6 +47,45 @@ struct BackgroundSelectorView: View {
             .ignoresSafeArea()
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    
+    @ViewBuilder
+    private func CustomColorBlockView() -> some View {
+        HStack(spacing: 8) {
+            TextField("Your hex color...", text: $customColor)
+                .textFieldStyle(.plain)
+                .padding(.horizontal)
+                .font(.headline)
+                .foregroundStyle(.white)
+                .padding(.vertical, 12)
+                .frame(maxWidth: .infinity)
+                .background {
+                    RoundedRectangle(cornerRadius: 15)
+                        .fill(.editorBackground)
+                }
+            
+            Button {
+                if let customColorHex = Color(hex: customColor) {
+                    selectedTab = customColorHex
+                } else {
+                    // Error alert...
+                }
+            } label: {
+                Image(systemName: "paintbrush.pointed.fill")
+                    .font(.headline)
+                    .fontWeight(.heavy)
+                    .foregroundStyle(.black)
+                    .padding(.vertical, 10)
+                    .frame(width: 60)
+                    .background {
+                        RoundedRectangle(cornerRadius: 15)
+                            .fill(Color.yellow)
+                    }
+            }
+            .buttonStyle(.plain)
+        }
+        .padding(.horizontal)
+        .padding(.bottom, 8)
     }
 }
 
