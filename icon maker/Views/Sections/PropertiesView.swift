@@ -20,6 +20,10 @@ struct PropertiesView: View {
             .padding(.horizontal)
             
             PanelView()
+            
+            if activePanel != .backgroundColor {
+                Spacer(minLength: 0)
+            }
         }
         .background(Color.black)
     }

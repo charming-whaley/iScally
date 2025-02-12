@@ -4,6 +4,7 @@ struct BackgroundSelectorView: View {
     private let columns = Array(repeating: GridItem(.fixed(130), spacing: 15), count: 2)
     
     @State private var selectedTab: Color = .red
+    @State private var customColor: String = ""
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -12,6 +13,20 @@ struct BackgroundSelectorView: View {
                 .fontWeight(.black)
                 .foregroundStyle(.white)
                 .padding(.leading)
+            
+            TextField("Your hex color...", text: $customColor)
+                .textFieldStyle(.plain)
+                .padding(.horizontal)
+                .font(.headline)
+                .foregroundStyle(.white)
+                .padding(.vertical, 12)
+                .frame(maxWidth: .infinity)
+                .background {
+                    RoundedRectangle(cornerRadius: 15)
+                        .fill(.editorBackground)
+                }
+                .padding(.horizontal)
+                .padding(.bottom, 10)
             
             ScrollView(.vertical) {
                 LazyVGrid(columns: columns, spacing: 15) {
@@ -23,7 +38,7 @@ struct BackgroundSelectorView: View {
                                 }
                             }
                             .overlay {
-                                if selectedTab == back {
+                                if selectedTab == back && customColor.isEmpty {
                                     RoundedRectangle(cornerRadius: 20)
                                         .fill(.clear)
                                         .stroke(.white, lineWidth: 2)
@@ -39,7 +54,7 @@ struct BackgroundSelectorView: View {
                             }
                     }
                 }
-                .padding(.bottom, 15)
+                .padding([.top, .bottom], 15)
             }
             .ignoresSafeArea()
         }
