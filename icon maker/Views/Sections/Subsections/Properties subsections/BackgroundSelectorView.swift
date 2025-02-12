@@ -4,7 +4,8 @@ struct BackgroundSelectorView: View {
     private let columns = Array(repeating: GridItem(.fixed(130), spacing: 15), count: 2)
     
     @State private var selectedTab: Color = .red
-    @State private var customColor: String = ""
+    @State private var customColor = ""
+    @State private var showErrorAlert = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -47,6 +48,13 @@ struct BackgroundSelectorView: View {
             .ignoresSafeArea()
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+        .alert(isPresented: $showErrorAlert) {
+            Alert(
+                title: Text("Incorrect color format"),
+                message: Text("You've entered a wrong color format. Please enter a valid HEX color code"),
+                dismissButton: .default(Text("Continue"))
+            )
+        }
     }
     
     @ViewBuilder
@@ -68,7 +76,7 @@ struct BackgroundSelectorView: View {
                 if let customColorHex = Color(hex: customColor) {
                     selectedTab = customColorHex
                 } else {
-                    // Error alert...
+                    showErrorAlert.toggle()
                 }
             } label: {
                 Image(systemName: "paintbrush.pointed.fill")
