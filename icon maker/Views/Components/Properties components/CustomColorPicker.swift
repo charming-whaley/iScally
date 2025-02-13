@@ -2,7 +2,8 @@ import SwiftUI
 import Combine
 
 public struct CustomColorPicker: NSViewRepresentable {
-    @Binding var color: Color
+    @Binding
+    var color: Color
     
     public func makeNSView(context: Context) -> NSColorWell {
         let colorWell = NSColorWell(style: .minimal)

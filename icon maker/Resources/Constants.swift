@@ -13,4 +13,6 @@ public struct Constants {
         "drop.circle.fill", "hare.fill", "tortoise.fill", "bird.fill", "leaf.fill", "tree.fill", "atom", "heart.fill",
         "cross.fill", "pills.fill", "brain.head.profile.fill", "waveform.path.ecg.rectangle.fill", "compass.drawing", "function", "apple.intelligence", "apple.terminal.fill"
     ]
+    
+    static let columns = Array(repeating: GridItem(.fixed(130), spacing: 15), count: 2)
 }

@@ -2,17 +2,21 @@ import SwiftUI
 
 public struct SegmentedControlView<Indicator>: View where Indicator: View {
     var panels: [Panel]
-    @Binding var activePanel: Panel
+    @Binding
+    var activePanel: Panel
     var height: CGFloat = 35
     
     var font: Font = .body
     var activeTint: Color
     var inActiveTint: Color
     
-    @ViewBuilder var indicatorView: (CGSize) -> Indicator
+    @ViewBuilder
+    var indicatorView: (CGSize) -> Indicator
     
-    @State private var excessed: CGFloat = .zero
-    @State private var minX: CGFloat = .zero
+    @State
+    private var excessed: CGFloat = .zero
+    @State
+    private var minX: CGFloat = .zero
     
     public var body: some View {
         GeometryReader {

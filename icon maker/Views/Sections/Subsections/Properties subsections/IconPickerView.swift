@@ -1,8 +1,6 @@
 import SwiftUI
 
 public struct IconPickerView: View {
-    private let columns = Array(repeating: GridItem(.fixed(130), spacing: 15), count: 2)
-    
     @Binding
     var symbol: String
     @Binding
@@ -21,7 +19,7 @@ public struct IconPickerView: View {
                 .padding(.bottom, 16)
             
             ScrollView(.vertical, showsIndicators: false) {
-                LazyVGrid(columns: columns, spacing: 16) {
+                LazyVGrid(columns: Constants.columns, spacing: 16) {
                     ForEach(Constants.icons, id: \.self) { icon in
                         IconFieldView(iconName: icon)
                             .onTapGesture {

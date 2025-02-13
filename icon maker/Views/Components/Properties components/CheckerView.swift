@@ -1,7 +1,9 @@
 import SwiftUI
 
 public struct CheckerView: View {
-    @Binding var switcher: Bool
+    @Binding
+    var switcher: Bool
+    
     let title: String
     
     public var body: some View {
@@ -19,8 +21,4 @@ public struct CheckerView: View {
             switcher.toggle()
         }
     }
-}
-
-#Preview {
-    CheckerView(switcher: .constant(true), title: "Turn on dark scheme")
 }

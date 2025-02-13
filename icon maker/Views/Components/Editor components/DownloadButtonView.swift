@@ -30,9 +30,3 @@ public struct DownloadButtonView: View {
         .buttonStyle(.plain)
     }
 }
-
-#Preview {
-    DownloadButtonView {
-        
-    }
-}

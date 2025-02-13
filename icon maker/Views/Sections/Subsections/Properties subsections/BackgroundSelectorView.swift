@@ -1,8 +1,6 @@
 import SwiftUI
 
 public struct BackgroundSelectorView: View {
-    private let columns = Array(repeating: GridItem(.fixed(130), spacing: 15), count: 2)
-    
     @Binding
     var currentColor: Color
     @Binding
@@ -29,7 +27,7 @@ public struct BackgroundSelectorView: View {
                 .padding(.bottom, 8)
             
             ScrollView(.vertical, showsIndicators: false) {
-                LazyVGrid(columns: columns, spacing: 16) {
+                LazyVGrid(columns: Constants.columns, spacing: 16) {
                     ForEach(Constants.backgroundColors, id: \.self) { background in
                         BackgroundColorBlockView(background)
                             .onTapGesture {
