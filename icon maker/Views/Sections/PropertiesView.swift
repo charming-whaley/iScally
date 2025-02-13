@@ -20,10 +20,6 @@ public struct PropertiesView: View {
             .padding(.horizontal)
             
             PanelView()
-            
-            if activePanel != .backgroundColor && activePanel != .icon {
-                Spacer(minLength: 0)
-            }
         }
         .background(Color.black)
     }
@@ -37,7 +33,6 @@ public struct PropertiesView: View {
             IconPickerView()
         case .others:
             ImagePropertiesView()
-                .padding(.horizontal)
         }
     }
 }
