@@ -5,6 +5,8 @@ public struct EditorView: View {
     var contentViewModel: ContentViewModel
     @State
     private var scale: CGFloat = 1.0
+    @State
+    private var hasShadow: Bool = false
     
     public var body: some View {
         VStack {
@@ -20,7 +22,8 @@ public struct EditorView: View {
                     backgroundColor: $contentViewModel.originalColor,
                     hasGradient: $contentViewModel.hasGradient,
                     imageName: $contentViewModel.currentSymbol,
-                    imageColor: $contentViewModel.symbolColor
+                    imageColor: $contentViewModel.symbolColor,
+                    hasShadow: $hasShadow
                 )
                 .scaleEffect(scale)
                 .animation(.easeInOut(duration: 0.2), value: scale)
@@ -31,6 +34,8 @@ public struct EditorView: View {
             
             HStack {
                 ZoomInOutView(scale: $scale)
+                Spacer(minLength: 0)
+                ShadowSwitcherButtonView(hasShadow: $hasShadow)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
