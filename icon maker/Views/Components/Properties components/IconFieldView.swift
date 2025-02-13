@@ -12,7 +12,7 @@ public struct IconFieldView: View {
             .overlay {
                 Image(systemName: iconName)
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
+                    .aspectRatio(contentMode: .fit)
                     .frame(width: 50, height: 50)
                     .foregroundStyle(.white)
             }
