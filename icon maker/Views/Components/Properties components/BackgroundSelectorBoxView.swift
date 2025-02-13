@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct BackgroundColorBlockView: View {
+public struct BackgroundSelectorBoxView: View {
     let fillColor: Color
     
     init(_ fillColor: Color) {

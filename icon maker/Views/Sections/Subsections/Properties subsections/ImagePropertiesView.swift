@@ -33,9 +33,9 @@ public struct ImagePropertiesView: View {
                         }
                  
                     Group {
-                        CheckerView(switcher: $hasHighQualitySupport, title: "High quality")
-                        CheckerView(switcher: $archived, title: "Create .zip archive")
-                        CheckerView(switcher: $hasWatchOSSupport, title: "watchOS Support")
+                        CustomToggleView(switcher: $hasHighQualitySupport, title: "High quality")
+                        CustomToggleView(switcher: $archived, title: "Create .zip archive")
+                        CustomToggleView(switcher: $hasWatchOSSupport, title: "watchOS Support")
                     }
                     .padding(.leading, 8)
                 }

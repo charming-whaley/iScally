@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct CheckerView: View {
+public struct CustomToggleView: View {
     @Binding
     var switcher: Bool
     

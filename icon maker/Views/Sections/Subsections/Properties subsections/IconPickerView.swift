@@ -21,7 +21,7 @@ public struct IconPickerView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVGrid(columns: Constants.columns, spacing: 16) {
                     ForEach(Constants.icons, id: \.self) { icon in
-                        IconFieldView(iconName: icon)
+                        IconBoxView(iconName: icon)
                             .onTapGesture {
                                 withAnimation(.snappy(duration: 0.25, extraBounce: 0)) {
                                     symbol = icon

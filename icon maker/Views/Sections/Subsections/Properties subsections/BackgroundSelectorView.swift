@@ -19,7 +19,7 @@ public struct BackgroundSelectorView: View {
                 .padding(.horizontal, 19)
                 .padding(.bottom, 14)
             
-            CheckerView(switcher: $hasGradient, title: "Add gradient")
+            CustomToggleView(switcher: $hasGradient, title: "Add gradient")
                 .padding(.horizontal, 19)
                 .padding(.bottom, 15)
              
@@ -29,7 +29,7 @@ public struct BackgroundSelectorView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVGrid(columns: Constants.columns, spacing: 16) {
                     ForEach(Constants.backgroundColors, id: \.self) { background in
-                        BackgroundColorBlockView(background)
+                        BackgroundSelectorBoxView(background)
                             .onTapGesture {
                                 withAnimation(.snappy(duration: 0.25, extraBounce: 0)) {
                                     currentColor = background

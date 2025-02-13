@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct SegmentedControlView<Indicator>: View where Indicator: View {
+public struct CustomSegmentedControlView<Indicator>: View where Indicator: View {
     var panels: [Panel]
     @Binding
     var activePanel: Panel

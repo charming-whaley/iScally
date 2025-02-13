@@ -8,7 +8,7 @@ public struct PropertiesView: View {
     
     public var body: some View {
         VStack(spacing: 30) {
-            SegmentedControlView(
+            CustomSegmentedControlView(
                 panels: Panel.allCases,
                 activePanel: $activePanel,
                 activeTint: .black,
