@@ -3,7 +3,7 @@ import SwiftUI
 public struct BackgroundSelectorView: View {
     private let columns = Array(repeating: GridItem(.fixed(130), spacing: 15), count: 2)
     
-    @State private var selectedTab: Color = .red
+    @State private var selectedTab: Color = Constants.backgroundColors.first!
     @State private var customColor = ""
     @State private var showErrorAlert = false
     @State private var switcher = false
@@ -14,17 +14,17 @@ public struct BackgroundSelectorView: View {
                 .font(.largeTitle)
                 .fontWeight(.black)
                 .foregroundStyle(.white)
-                .padding(.leading)
+                .padding(.horizontal, 19)
                 .padding(.bottom, 14)
             
             CheckerView(switcher: $switcher, title: "Add gradient")
-                .padding(.horizontal)
+                .padding(.horizontal, 19)
                 .padding(.bottom, 15)
-            
+             
             CustomColorBlockView()
             
-            ScrollView(.vertical) {
-                LazyVGrid(columns: columns, spacing: 15) {
+            ScrollView(.vertical, showsIndicators: false) {
+                LazyVGrid(columns: columns, spacing: 16) {
                     ForEach(Constants.backgroundColors, id: \.self) { back in
                         BackgroundColorBlockView(back)
                             .onTapGesture {
@@ -98,7 +98,7 @@ public struct BackgroundSelectorView: View {
             }
             .buttonStyle(.plain)
         }
-        .padding(.horizontal)
+        .padding(.horizontal, 19)
         .padding(.bottom, 8)
     }
 }

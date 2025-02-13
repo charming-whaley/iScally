@@ -21,7 +21,7 @@ public struct PropertiesView: View {
             
             PanelView()
             
-            if activePanel != .backgroundColor {
+            if activePanel != .backgroundColor && activePanel != .icon {
                 Spacer(minLength: 0)
             }
         }
