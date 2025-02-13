@@ -1,10 +1,14 @@
 import SwiftUI
  
 public struct ImagePropertiesView: View {
-    @State private var fileName: String = ""
-    @State private var watchOSSupport: Bool = false
-    @State private var highQualitySupport: Bool = false
-    @State private var archived = false
+    @Binding
+    var filename: String
+    @Binding
+    var hasWatchOSSupport: Bool
+    @Binding
+    var hasHighQualitySupport: Bool
+    @Binding
+    var archived: Bool
     
     public var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -16,7 +20,7 @@ public struct ImagePropertiesView: View {
             
             Section {
                 VStack(alignment: .leading, spacing: 14) {
-                    TextField("File name...", text: $fileName)
+                    TextField("File name...", text: $filename)
                         .textFieldStyle(.plain)
                         .padding(.horizontal)
                         .font(.headline)
@@ -29,9 +33,9 @@ public struct ImagePropertiesView: View {
                         }
                  
                     Group {
-                        CheckerView(switcher: $highQualitySupport, title: "High quality")
+                        CheckerView(switcher: $hasHighQualitySupport, title: "High quality")
                         CheckerView(switcher: $archived, title: "Create .zip archive")
-                        CheckerView(switcher: $watchOSSupport, title: "watchOS Support")
+                        CheckerView(switcher: $hasWatchOSSupport, title: "watchOS Support")
                     }
                     .padding(.leading, 8)
                 }

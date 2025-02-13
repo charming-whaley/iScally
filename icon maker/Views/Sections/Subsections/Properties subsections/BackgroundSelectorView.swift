@@ -3,10 +3,14 @@ import SwiftUI
 public struct BackgroundSelectorView: View {
     private let columns = Array(repeating: GridItem(.fixed(130), spacing: 15), count: 2)
     
-    @State private var selectedTab: Color = Constants.backgroundColors.first!
-    @State private var customColor = ""
-    @State private var showErrorAlert = false
-    @State private var switcher = false
+    @Binding
+    var currentColor: Color
+    @Binding
+    var customColor: String
+    @Binding
+    var hasGradient: Bool
+    @State
+    private var showErrorAlert = false
     
     public var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -17,23 +21,24 @@ public struct BackgroundSelectorView: View {
                 .padding(.horizontal, 19)
                 .padding(.bottom, 14)
             
-            CheckerView(switcher: $switcher, title: "Add gradient")
+            CheckerView(switcher: $hasGradient, title: "Add gradient")
                 .padding(.horizontal, 19)
                 .padding(.bottom, 15)
              
             CustomColorBlockView()
+                .padding(.bottom, 8)
             
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVGrid(columns: columns, spacing: 16) {
-                    ForEach(Constants.backgroundColors, id: \.self) { back in
-                        BackgroundColorBlockView(back)
+                    ForEach(Constants.backgroundColors, id: \.self) { background in
+                        BackgroundColorBlockView(background)
                             .onTapGesture {
                                 withAnimation(.snappy(duration: 0.25, extraBounce: 0)) {
-                                    selectedTab = back
+                                    currentColor = background
                                 }
                             }
                             .overlay {
-                                if selectedTab == back && customColor.isEmpty {
+                                if currentColor == background && customColor.isEmpty {
                                     RoundedRectangle(cornerRadius: 20)
                                         .fill(.clear)
                                         .stroke(.white, lineWidth: 2)
@@ -80,7 +85,7 @@ public struct BackgroundSelectorView: View {
             
             Button {
                 if let customColorHex = Color(hex: customColor) {
-                    selectedTab = customColorHex
+                    currentColor = customColorHex
                 } else {
                     showErrorAlert.toggle()
                 }
@@ -101,8 +106,4 @@ public struct BackgroundSelectorView: View {
         .padding(.horizontal, 19)
         .padding(.bottom, 8)
     }
-}
-
-#Preview {
-    BackgroundSelectorView()
 }

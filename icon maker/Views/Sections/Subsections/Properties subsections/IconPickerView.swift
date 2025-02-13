@@ -3,8 +3,10 @@ import SwiftUI
 public struct IconPickerView: View {
     private let columns = Array(repeating: GridItem(.fixed(130), spacing: 15), count: 2)
     
-    @State private var selectedTab: String = Constants.icons.first!
-    @State private var currentColor: Color = .white
+    @Binding
+    var symbol: String
+    @Binding
+    var symbolColor: Color
     
     public var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -16,7 +18,7 @@ public struct IconPickerView: View {
                 .padding(.bottom, 14)
             
             IconBackgroundSelector()
-                .padding(.bottom, 8)
+                .padding(.bottom, 16)
             
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVGrid(columns: columns, spacing: 16) {
@@ -24,11 +26,11 @@ public struct IconPickerView: View {
                         IconFieldView(iconName: icon)
                             .onTapGesture {
                                 withAnimation(.snappy(duration: 0.25, extraBounce: 0)) {
-                                    selectedTab = icon
+                                    symbol = icon
                                 }
                             }
                             .overlay {
-                                if selectedTab == icon {
+                                if symbol == icon {
                                     RoundedRectangle(cornerRadius: 20)
                                         .fill(.clear)
                                         .stroke(.white, lineWidth: 3)
@@ -59,11 +61,9 @@ public struct IconPickerView: View {
             
             Spacer(minLength: 0)
             
-            CustomColorPicker(color: $currentColor)
+            CustomColorPicker(color: $symbolColor)
                 .frame(width: 40, height: 16)
         }
         .padding(.horizontal, 19)
     }
 }
- 
- 

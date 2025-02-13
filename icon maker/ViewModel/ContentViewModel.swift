@@ -2,19 +2,21 @@ import SwiftUI
 
 final class ContentViewModel: ObservableObject {
     @Published
-    var title: String = "New Icon"
+    var hasGradient = false
+    @Published 
+    var customColor = ""
     @Published
-    var width: CGFloat = .zero
+    var originalColor: Color = Constants.backgroundColors.first!
     @Published
-    var height: CGFloat = .zero
+    var currentSymbol: String = Constants.icons.first!
     @Published
-    var systemImage: String = ""
+    var symbolColor: Color = .white
+    @Published 
+    var filename: String = ""
     @Published
-    var backgroundColor: Color = .blue
+    var hasWatchOSSupport: Bool = false
     @Published
-    var linearGradient: LinearGradient?
+    var hasHigherQuality: Bool = false
     @Published
-    var hasGradient: Bool = false
-    @Published
-    var hasInnerShadow: Bool = false
+    var archiveImages: Bool = false
 }

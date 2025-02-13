@@ -1,7 +1,10 @@
 import SwiftUI
 
 public struct PropertiesView: View {
-    @State private var activePanel = Panel.backgroundColor
+    @ObservedObject
+    var contentViewModel: ContentViewModel
+    @State
+    private var activePanel: Panel = .backgroundColor
     
     public var body: some View {
         VStack(spacing: 30) {
@@ -28,16 +31,23 @@ public struct PropertiesView: View {
     private func PanelView() -> some View {
         switch activePanel {
         case .backgroundColor:
-            BackgroundSelectorView()
+            BackgroundSelectorView(
+                currentColor: $contentViewModel.originalColor,
+                customColor: $contentViewModel.customColor,
+                hasGradient: $contentViewModel.hasGradient
+            )
         case .icon:
-            IconPickerView()
+            IconPickerView(
+                symbol: $contentViewModel.currentSymbol,
+                symbolColor: $contentViewModel.symbolColor
+            )
         case .others:
-            ImagePropertiesView()
+            ImagePropertiesView(
+                filename: $contentViewModel.filename,
+                hasWatchOSSupport: $contentViewModel.hasWatchOSSupport,
+                hasHighQualitySupport: $contentViewModel.hasHigherQuality,
+                archived: $contentViewModel.archiveImages
+            )
         }
     }
-}
-
-#Preview {
-    PropertiesView()
-    
 }
