@@ -12,7 +12,7 @@ final class ContentViewModel: ObservableObject {
     @Published
     var symbolColor: Color = .white
     @Published 
-    var filename: String = ""
+    var filename: String = "New image"
     @Published
     var hasWatchOSSupport: Bool = false
     @Published
