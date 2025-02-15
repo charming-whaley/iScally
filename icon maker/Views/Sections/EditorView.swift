@@ -55,28 +55,28 @@ extension EditorView {
         Button {
             var images = [NSImage]()
             if contentViewModel.hasWatchOSSupport && !contentViewModel.hasMacOSSupport {
-                images = (Constants.extendedImageSizesWatchOS).map { size in
+                images = (Contents.extendedImageSizesWatchOS).map { size in
                     renderIconFieldViewAsNSImage(
                         withWidth: size.width,
                         AndHeight: size.height
                     )
                 }
             } else if !contentViewModel.hasWatchOSSupport && contentViewModel.hasMacOSSupport {
-                images = (Constants.extendedImageSizesMacOS).map { size in
+                images = (Contents.extendedImageSizesMacOS).map { size in
                     renderIconFieldViewAsNSImage(
                         withWidth: size.width,
                         AndHeight: size.height
                     )
                 }
             } else if contentViewModel.hasWatchOSSupport && contentViewModel.hasMacOSSupport {
-                images = (Constants.extendedImageSizes).map { size in
+                images = (Contents.extendedImageSizes).map { size in
                     renderIconFieldViewAsNSImage(
                         withWidth: size.width,
                         AndHeight: size.height
                     )
                 }
             } else {
-                images = (Constants.standardImageSizes).map { size in
+                images = (Contents.standardImageSizes).map { size in
                     renderIconFieldViewAsNSImage(
                         withWidth: size.width,
                         AndHeight: size.height

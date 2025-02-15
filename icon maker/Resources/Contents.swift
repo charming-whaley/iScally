@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct Constants {
+public struct Contents {
     static let backgroundColors: [Color] = [
         .standardAppAnotherOrange, .standardAppBlack, .standardAppBlue, .standardAppCyan, .standardAppDarkPink, .standardAppGray, .standardAppGreen, .standardAppIndigo, .standardAppLightIndigo, .standardAppLightMint, .standardAppLightPink, .standardAppOrange, .standardAppPaletteBlue, .standardAppPink, .standardAppRed, .standardAppSalad, .standardAppSea, .standardAppYellow, .standardPurple
     ].reversed()
@@ -14,7 +14,8 @@ public struct Constants {
         "cross.fill", "pills.fill", "brain.head.profile.fill", "waveform.path.ecg.rectangle.fill", "compass.drawing", "function", "apple.intelligence", "apple.terminal.fill"
     ]
     
-    static let columns = Array(repeating: GridItem(.fixed(130), spacing: 15), count: 2)
+    static let columns = Array(repeating: GridItem(.fixed(130), spacing: 16), count: 2)
+    static let flexibleColumns = Array(repeating: GridItem(.fixed(130), spacing: 16), count: 4)
     
     static let standardImageSizes: [ImageSize] = [
         .init(width: 40, height: 40),

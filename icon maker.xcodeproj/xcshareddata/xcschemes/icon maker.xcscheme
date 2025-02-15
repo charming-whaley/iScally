@@ -16,7 +16,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "852931252D5AE471008EB469"
-               BuildableName = "iscally.app"
+               BuildableName = "iScally.app"
                BlueprintName = "iscally"
                ReferencedContainer = "container:icon maker.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "852931252D5AE471008EB469"
-            BuildableName = "iscally.app"
+            BuildableName = "iScally.app"
             BlueprintName = "iscally"
             ReferencedContainer = "container:icon maker.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "852931252D5AE471008EB469"
-            BuildableName = "iscally.app"
+            BuildableName = "iScally.app"
             BlueprintName = "iscally"
             ReferencedContainer = "container:icon maker.xcodeproj">
          </BuildableReference>

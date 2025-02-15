@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 
 public struct BackgroundSelectorView: View {
     @Binding
@@ -9,6 +10,8 @@ public struct BackgroundSelectorView: View {
     var hasGradient: Bool
     @State
     private var showErrorAlert = false
+    @State
+    private var wentToFullScreenMode: Bool = false
     
     public var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -27,8 +30,8 @@ public struct BackgroundSelectorView: View {
                 .padding(.bottom, 8)
             
             ScrollView(.vertical, showsIndicators: false) {
-                LazyVGrid(columns: Constants.columns, spacing: 16) {
-                    ForEach(Constants.backgroundColors, id: \.self) { background in
+                LazyVGrid(columns: wentToFullScreenMode ? Contents.flexibleColumns : Contents.columns, spacing: 16) {
+                    ForEach(Contents.backgroundColors, id: \.self) { background in
                         BackgroundSelectorBoxView(background)
                             .onTapGesture {
                                 withAnimation(.snappy(duration: 0.25, extraBounce: 0)) {
@@ -63,6 +66,26 @@ public struct BackgroundSelectorView: View {
                 message: Text("You've entered a wrong color format. Please enter a valid HEX color code"),
                 dismissButton: .default(Text("Continue"))
             )
+        }
+        .onAppear {
+            if let window = NSApplication.shared.windows.first {
+                wentToFullScreenMode = window.styleMask.contains(.fullScreen)
+            }
+            
+            NotificationCenter.default.addObserver(
+                forName: NSWindow.willEnterFullScreenNotification,
+                object: nil,
+                queue: .main
+            ) { _ in
+                wentToFullScreenMode = true
+            }
+            NotificationCenter.default.addObserver(
+                forName: NSWindow.willExitFullScreenNotification,
+                object: nil,
+                queue: .main
+            ) { _ in
+                wentToFullScreenMode = false
+            }
         }
     }
     
