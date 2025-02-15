@@ -1,4 +1,5 @@
 import SwiftUI
+import Foundation
 import AppKit
 import Cocoa
 
@@ -46,7 +47,13 @@ extension EditorView {
     @ViewBuilder
     private func DownloadButtonView() -> some View {
         Button {
-            downloadImageOnComputer(renderIconFieldViewAsNSImage(withWidth: 120, AndHeight: 120))
+            let images: [NSImage] = (Constants.imageSizes).map { size in
+                renderIconFieldViewAsNSImage(
+                    withWidth: size.width,
+                    AndHeight: size.height
+                )
+            }
+            downloadImagesOnComputer(images)
         } label: {
             Image(systemName: "arrow.down.circle.fill")
                 .font(.title2)
@@ -59,6 +66,38 @@ extension EditorView {
                 }
         }
         .buttonStyle(.plain)
+    }
+    
+    private func downloadImagesOnComputer(_ images: [NSImage]) {
+        let panel = NSSavePanel()
+        panel.title = "Save on your Mac computer"
+        panel.nameFieldStringValue = "\($contentViewModel.filename.wrappedValue).zip"
+        panel.allowedFileTypes = ["zip"]
+        
+        panel.begin { response in
+            if response == .OK, let url = panel.url {
+                let fileManager = FileManager.default
+                let tempDirectory = fileManager.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+                
+                do {
+                    try fileManager.createDirectory(at: tempDirectory, withIntermediateDirectories: true)
+                    for (_, image) in images.enumerated() {
+                        let imageURL = tempDirectory.appendingPathComponent("\(image.size.width)x\(image.size.height).png")
+                        if let pngData = image.pngData {
+                            try pngData.write(to: imageURL)
+                        }
+                    }
+                    let process = Process()
+                    process.executableURL = URL(fileURLWithPath: "/usr/bin/ditto")
+                    process.arguments = ["-c", "-k", "--sequesterRsrc", "--keepParent", tempDirectory.path, url.path]
+                    try process.run()
+                    process.waitUntilExit()
+                    try fileManager.removeItem(at: tempDirectory)
+                } catch {
+                    return
+                }
+            }
+        }
     }
     
     private func renderIconFieldViewAsNSImage(withWidth width: CGFloat, AndHeight height: CGFloat) -> NSImage {
@@ -86,20 +125,6 @@ extension EditorView {
         let image = NSImage(size: size)
         image.addRepresentation(bitmapRep)
         return image
-    }
-    
-    private func downloadImageOnComputer(_ image: NSImage) {
-        let panel = NSSavePanel()
-        panel.title = "Save on Mac computer"
-        panel.nameFieldStringValue = $contentViewModel.filename.wrappedValue
-        panel.allowedFileTypes = ["png"]
-        
-        panel.begin { response in
-            if response == .OK, let url = panel.url {
-                guard let pngData = image.pngData else { return }
-                try? pngData.write(to: url)
-            }
-        }
     }
 }
 

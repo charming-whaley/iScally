@@ -15,4 +15,21 @@ public struct Constants {
     ]
     
     static let columns = Array(repeating: GridItem(.fixed(130), spacing: 15), count: 2)
+    
+    static let imageSizes: [ImageSize] = [
+        .init(width: 40, height: 40),
+        .init(width: 58, height: 58),
+        .init(width: 60, height: 60),
+        .init(width: 76, height: 76),
+        .init(width: 80, height: 80),
+        .init(width: 87, height: 87),
+        .init(width: 114, height: 114),
+        .init(width: 120, height: 120),
+        .init(width: 128, height: 128),
+        .init(width: 136, height: 136),
+        .init(width: 167, height: 167),
+        .init(width: 180, height: 180),
+        .init(width: 192, height: 192),
+        .init(width: 1024, height: 1024)
+    ]
 }
