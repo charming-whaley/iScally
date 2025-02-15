@@ -1,4 +1,5 @@
 import SwiftUI
+import AppKit
 
 public struct RootView: View {
     @StateObject

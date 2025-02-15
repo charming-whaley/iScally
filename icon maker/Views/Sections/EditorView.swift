@@ -35,12 +35,32 @@ public struct EditorView: View {
             HStack {
                 ZoomInOutView(scale: $scale)
                 Spacer(minLength: 0)
-                ShadowSwitcherButtonView(hasShadow: $hasShadow)
+                DownloadButtonView()
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
         .padding(30)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color("EditorBackgroundColor"))
+    }
+}
+
+extension EditorView {
+    @ViewBuilder
+    private func DownloadButtonView() -> some View {
+        Button {
+            
+        } label: {
+            Image(systemName: "arrow.down.circle.fill")
+                .font(.title2)
+                .foregroundStyle(.white)
+                .fontWeight(.heavy)
+                .frame(width: 60, height: 60)
+                .background {
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(.black)
+                }
+        }
+        .buttonStyle(.plain)
     }
 }

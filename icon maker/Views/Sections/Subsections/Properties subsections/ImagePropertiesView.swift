@@ -46,11 +46,6 @@ public struct ImagePropertiesView: View {
             }
             
             Spacer(minLength: 0)
-            
-            DownloadButtonView {
-                
-            }
-            .padding(.bottom, 19)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 19)

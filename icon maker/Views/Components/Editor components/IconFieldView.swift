@@ -1,4 +1,5 @@
 import SwiftUI
+import AppKit
 
 public struct IconFieldView: View {
     @Binding
