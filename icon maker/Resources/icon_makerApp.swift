@@ -5,16 +5,8 @@ struct icon_makerApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
-                .onAppear {
-                    DispatchQueue.main.async {
-                        NSApplication.shared.windows.forEach { window in
-                            window.standardWindowButton(.zoomButton)?.isEnabled = false
-                        }
-                    }
-                }
+                .frame(minWidth: 1280, minHeight: 720)
         }
-        .defaultSize(width: 1280, height: 720)
-        .windowResizability(.contentSize)
         .windowStyle(.hiddenTitleBar)
     }
 }

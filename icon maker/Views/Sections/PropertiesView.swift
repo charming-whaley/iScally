@@ -1,10 +1,13 @@
 import SwiftUI
+import Combine
 
 public struct PropertiesView: View {
     @ObservedObject
     var contentViewModel: ContentViewModel
     @State
     private var activePanel: Panel = .backgroundColor
+    @State
+    private var wentToFullScreenMode: Bool = false
     
     public var body: some View {
         VStack(spacing: 30) {
@@ -20,11 +23,36 @@ public struct PropertiesView: View {
                     .padding(.horizontal, 0)
                     .frame(maxWidth: .infinity, alignment: .bottom)
             }
+            .padding(.top, wentToFullScreenMode ? 40 : 0)
             .padding(.horizontal)
+            .onAppear {
+                checkFullscreenModeStatus()
+                
+                NotificationCenter.default.addObserver(
+                    forName: NSWindow.willEnterFullScreenNotification,
+                    object: nil,
+                    queue: .main
+                ) { _ in
+                    wentToFullScreenMode = true
+                }
+                NotificationCenter.default.addObserver(
+                    forName: NSWindow.willExitFullScreenNotification,
+                    object: nil,
+                    queue: .main
+                ) { _ in
+                    wentToFullScreenMode = false
+                }
+            }
             
             PanelView()
         }
         .background(Color.black)
+    }
+    
+    private func checkFullscreenModeStatus() {
+        if let window = NSApplication.shared.windows.first {
+            wentToFullScreenMode = window.styleMask.contains(.fullScreen)
+        }
     }
     
     @ViewBuilder
