@@ -12,6 +12,10 @@ iScally is the lightweight macOS utility written in SwiftUI that helps creating 
 
 ## Usage
 
-Clone this repo to XCode and run it on your Mac. Process of creating icons is very smooth: just choose how you prefere to see your new icon and tap download button at the bottom of the editor
+```
+https://github.com/charming-whaley/iScally.git
+```
+
+Clone this repo to XCode and run it on your Mac. Process of creating icons is very smooth: just choose how you prefer to see your new icon and tap download button at the bottom of the editor
 
 ![screen](https://github.com/user-attachments/assets/04da4111-ca8c-4d5e-be6a-08d8c15a3be1)
