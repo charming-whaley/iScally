@@ -46,7 +46,7 @@ extension EditorView {
     @ViewBuilder
     private func DownloadButtonView() -> some View {
         Button {
-            downloadImageOnComputer(renderIconFieldViewAsNSImage())
+            downloadImageOnComputer(renderIconFieldViewAsNSImage(withWidth: 120, AndHeight: 120))
         } label: {
             Image(systemName: "arrow.down.circle.fill")
                 .font(.title2)
@@ -61,17 +61,20 @@ extension EditorView {
         .buttonStyle(.plain)
     }
     
-    private func renderIconFieldViewAsNSImage() -> NSImage {
+    private func renderIconFieldViewAsNSImage(withWidth width: CGFloat, AndHeight height: CGFloat) -> NSImage {
         let hostingViewController = NSHostingView(rootView: IconFieldView(
             backgroundColor: $contentViewModel.originalColor,
             hasGradient: $contentViewModel.hasGradient,
             imageName: $contentViewModel.currentSymbol,
             imageColor: $contentViewModel.symbolColor,
-            hasShadow: $hasShadow
+            hasShadow: $hasShadow,
+            width: width,
+            height: height,
+            radius: 0
         ))
         let size = CGSize(
-            width: 800,
-            height: 800
+            width: width,
+            height: height
         )
         hostingViewController.frame = CGRect(
             origin: .zero,
@@ -87,6 +90,8 @@ extension EditorView {
     
     private func downloadImageOnComputer(_ image: NSImage) {
         let panel = NSSavePanel()
+        panel.title = "Save on Mac computer"
+        panel.nameFieldStringValue = $contentViewModel.filename.wrappedValue
         panel.allowedFileTypes = ["png"]
         
         panel.begin { response in

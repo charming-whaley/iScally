@@ -13,16 +13,20 @@ public struct IconFieldView: View {
     @Binding
     var hasShadow: Bool
     
+    var width: CGFloat = 300
+    var height: CGFloat = 300
+    var radius: CGFloat = 60
+    
     public var body: some View {
-        RoundedRectangle(cornerRadius: 60)
+        RoundedRectangle(cornerRadius: radius)
             .fill(hasGradient ? AnyShapeStyle(backgroundColor.gradient) : AnyShapeStyle(backgroundColor))
-            .frame(width: 300, height: 300)
+            .frame(width: width, height: height)
             .overlay(alignment: .center) {
                 if !imageName.isEmpty {
                     Image(systemName: imageName)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: 150, height: 150)
+                        .frame(width: width / 2, height: height / 2)
                         .foregroundStyle(imageColor)
                 }
             }
