@@ -45,8 +45,7 @@ public struct PropertiesView: View {
             ImagePropertiesView(
                 filename: $contentViewModel.filename,
                 hasWatchOSSupport: $contentViewModel.hasWatchOSSupport,
-                hasHighQualitySupport: $contentViewModel.hasHigherQuality,
-                archived: $contentViewModel.archiveImages
+                hasMacOSSupport: $contentViewModel.hasMacOSSupport
             )
         }
     }

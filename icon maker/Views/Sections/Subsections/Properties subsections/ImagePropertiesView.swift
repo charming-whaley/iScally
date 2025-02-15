@@ -6,9 +6,7 @@ public struct ImagePropertiesView: View {
     @Binding
     var hasWatchOSSupport: Bool
     @Binding
-    var hasHighQualitySupport: Bool
-    @Binding
-    var archived: Bool
+    var hasMacOSSupport: Bool
     
     public var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -33,9 +31,8 @@ public struct ImagePropertiesView: View {
                         }
                  
                     Group {
-                        CustomToggleView(switcher: $hasHighQualitySupport, title: "High quality")
-                        CustomToggleView(switcher: $archived, title: "Create .zip archive")
-                        CustomToggleView(switcher: $hasWatchOSSupport, title: "watchOS Support")
+                        CustomToggleView(switcher: $hasMacOSSupport, title: "add macOS sizes")
+                        CustomToggleView(switcher: $hasWatchOSSupport, title: "add watchOS sizes")
                     }
                     .padding(.leading, 8)
                 }

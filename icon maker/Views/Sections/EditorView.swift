@@ -1,7 +1,6 @@
 import SwiftUI
 import Foundation
 import AppKit
-import Cocoa
 
 public struct EditorView: View {
     @EnvironmentObject
@@ -39,7 +38,14 @@ public struct EditorView: View {
         }
         .padding(30)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background {
+            Image("grid")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .opacity(0.3)
+        }
         .background(Color("EditorBackgroundColor"))
+        .ignoresSafeArea()
     }
 }
 
@@ -47,22 +53,46 @@ extension EditorView {
     @ViewBuilder
     private func DownloadButtonView() -> some View {
         Button {
-            let images: [NSImage] = (Constants.imageSizes).map { size in
-                renderIconFieldViewAsNSImage(
-                    withWidth: size.width,
-                    AndHeight: size.height
-                )
+            var images = [NSImage]()
+            if contentViewModel.hasWatchOSSupport && !contentViewModel.hasMacOSSupport {
+                images = (Constants.extendedImageSizesWatchOS).map { size in
+                    renderIconFieldViewAsNSImage(
+                        withWidth: size.width,
+                        AndHeight: size.height
+                    )
+                }
+            } else if !contentViewModel.hasWatchOSSupport && contentViewModel.hasMacOSSupport {
+                images = (Constants.extendedImageSizesMacOS).map { size in
+                    renderIconFieldViewAsNSImage(
+                        withWidth: size.width,
+                        AndHeight: size.height
+                    )
+                }
+            } else if contentViewModel.hasWatchOSSupport && contentViewModel.hasMacOSSupport {
+                images = (Constants.extendedImageSizes).map { size in
+                    renderIconFieldViewAsNSImage(
+                        withWidth: size.width,
+                        AndHeight: size.height
+                    )
+                }
+            } else {
+                images = (Constants.standardImageSizes).map { size in
+                    renderIconFieldViewAsNSImage(
+                        withWidth: size.width,
+                        AndHeight: size.height
+                    )
+                }
             }
             downloadImagesOnComputer(images)
         } label: {
             Image(systemName: "arrow.down.circle.fill")
                 .font(.title2)
-                .foregroundStyle(.white)
+                .foregroundStyle(.black)
                 .fontWeight(.heavy)
                 .frame(width: 60, height: 60)
                 .background {
                     RoundedRectangle(cornerRadius: 20)
-                        .fill(.black)
+                        .fill(.yellow)
                 }
         }
         .buttonStyle(.plain)
@@ -77,16 +107,18 @@ extension EditorView {
         panel.begin { response in
             if response == .OK, let url = panel.url {
                 let fileManager = FileManager.default
-                let tempDirectory = fileManager.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+                let tempDirectory = fileManager.temporaryDirectory.appendingPathComponent("\($contentViewModel.filename.wrappedValue)")
                 
                 do {
                     try fileManager.createDirectory(at: tempDirectory, withIntermediateDirectories: true)
+                    
                     for (_, image) in images.enumerated() {
-                        let imageURL = tempDirectory.appendingPathComponent("\(image.size.width)x\(image.size.height).png")
+                        let imageURL = tempDirectory.appendingPathComponent("\(Int(image.size.width))x\(Int(image.size.height)).png")
                         if let pngData = image.pngData {
                             try pngData.write(to: imageURL)
                         }
                     }
+                    
                     let process = Process()
                     process.executableURL = URL(fileURLWithPath: "/usr/bin/ditto")
                     process.arguments = ["-c", "-k", "--sequesterRsrc", "--keepParent", tempDirectory.path, url.path]

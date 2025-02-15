@@ -16,7 +16,5 @@ final class ContentViewModel: ObservableObject {
     @Published
     var hasWatchOSSupport: Bool = false
     @Published
-    var hasHigherQuality: Bool = false
-    @Published
-    var archiveImages: Bool = false
+    var hasMacOSSupport: Bool = false
 }

@@ -4,9 +4,9 @@ public struct ZoomInOutView: View {
     @Binding
     var scale: CGFloat
     @State
-    private var minimumScale: CGFloat = 1.0
+    private var minimumScale: CGFloat = 0.7
     @State
-    private var maximumScale: CGFloat = 1.7
+    private var maximumScale: CGFloat = 1.5
     
     public var body: some View {
         HStack(spacing: 10) {
@@ -15,12 +15,12 @@ public struct ZoomInOutView: View {
             } label: {
                 Image(systemName: "plus.magnifyingglass")
                     .font(.title2)
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.white)
                     .fontWeight(.heavy)
                     .frame(width: 60, height: 60)
                     .background {
                         RoundedRectangle(cornerRadius: 20)
-                            .fill(.yellow)
+                            .fill(.black)
                     }
             }
             .buttonStyle(.plain)
@@ -30,12 +30,27 @@ public struct ZoomInOutView: View {
             } label: {
                 Image(systemName: "minus.magnifyingglass")
                     .font(.title2)
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.white)
                     .fontWeight(.heavy)
                     .frame(width: 60, height: 60)
                     .background {
                         RoundedRectangle(cornerRadius: 20)
-                            .fill(.yellow)
+                            .fill(.black)
+                    }
+            }
+            .buttonStyle(.plain)
+            
+            Button {
+                scale = 1.0
+            } label: {
+                Image(systemName: "sparkle.magnifyingglass")
+                    .font(.title2)
+                    .foregroundStyle(.white)
+                    .fontWeight(.heavy)
+                    .frame(width: 60, height: 60)
+                    .background {
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(.black)
                     }
             }
             .buttonStyle(.plain)
