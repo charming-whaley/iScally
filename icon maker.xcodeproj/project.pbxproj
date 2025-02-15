@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		852931262D5AE471008EB469 /* icon maker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "icon maker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		852931262D5AE471008EB469 /* iscally.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iscally.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -40,7 +40,7 @@
 		852931272D5AE471008EB469 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				852931262D5AE471008EB469 /* icon maker.app */,
+				852931262D5AE471008EB469 /* iscally.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +48,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		852931252D5AE471008EB469 /* icon maker */ = {
+		852931252D5AE471008EB469 /* iscally */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 852931352D5AE472008EB469 /* Build configuration list for PBXNativeTarget "icon maker" */;
+			buildConfigurationList = 852931352D5AE472008EB469 /* Build configuration list for PBXNativeTarget "iscally" */;
 			buildPhases = (
 				852931222D5AE471008EB469 /* Sources */,
 				852931232D5AE471008EB469 /* Frameworks */,
@@ -63,11 +63,11 @@
 			fileSystemSynchronizedGroups = (
 				852931282D5AE471008EB469 /* icon maker */,
 			);
-			name = "icon maker";
+			name = iscally;
 			packageProductDependencies = (
 			);
 			productName = "icon maker";
-			productReference = 852931262D5AE471008EB469 /* icon maker.app */;
+			productReference = 852931262D5AE471008EB469 /* iscally.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -99,7 +99,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				852931252D5AE471008EB469 /* icon maker */,
+				852931252D5AE471008EB469 /* iscally */,
 			);
 		};
 /* End PBXProject section */
@@ -315,7 +315,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		852931352D5AE472008EB469 /* Build configuration list for PBXNativeTarget "icon maker" */ = {
+		852931352D5AE472008EB469 /* Build configuration list for PBXNativeTarget "iscally" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				852931362D5AE472008EB469 /* Debug */,
