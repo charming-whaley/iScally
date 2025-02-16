@@ -10,7 +10,7 @@ public struct ImagePropertiesView: View {
     
     public var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("Additional")
+            Text("Preferences")
                 .font(.largeTitle)
                 .fontWeight(.black)
                 .foregroundStyle(.white)

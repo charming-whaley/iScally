@@ -9,6 +9,12 @@ public struct EditorView: View {
     private var scale: CGFloat = 1.0
     @State
     private var hasShadow: Bool = false
+    @State
+    private var hasZoomAppeared: Bool = false
+    @State
+    private var hasErrorRenderingImageThrown: Bool = false
+    @State
+    private var hasErrorCreatingDirectoryThrown: Bool = false
     
     public var body: some View {
         VStack {
@@ -25,11 +31,19 @@ public struct EditorView: View {
                 .scaleEffect(scale)
                 .animation(.easeInOut(duration: 0.2), value: scale)
             }
-            .frame(maxWidth: .infinity, alignment: .center)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            .overlay(alignment: .topTrailing) {
+                if hasZoomAppeared {
+                    Text("\(String(format: "%.1f", scale))x")
+                        .font(.system(size: 20, weight: .black))
+                        .foregroundStyle(.white)
+                        .padding(.bottom, -500)
+                }
+            }
             
             Spacer(minLength: 0)
             
-            HStack {
+            HStack(spacing: 10) {
                 ZoomInOutView(scale: $scale)
                 Spacer(minLength: 0)
                 DownloadButtonView()
@@ -46,6 +60,34 @@ public struct EditorView: View {
         }
         .background(Color("EditorBackgroundColor"))
         .ignoresSafeArea()
+        .onChange(of: scale) { oldValue, newValue in
+            if newValue < 1.0 || newValue > 1.0 || oldValue < 1.0 || oldValue > 1.0 {
+                withAnimation(.easeIn) {
+                    hasZoomAppeared.toggle()
+                }
+                
+                Task { @MainActor in
+                    try? await Task.sleep(for: .seconds(0.9))
+                    withAnimation(.easeOut) {
+                        hasZoomAppeared.toggle()
+                    }
+                }
+            }
+        }
+        .alert(isPresented: $hasErrorRenderingImageThrown) {
+            Alert(
+                title: Text("Image rendering error"),
+                message: Text("There was an error rendering image pack. Please try again or relaunch the app."),
+                dismissButton: .default(Text("Continue"))
+            )
+        }
+        .alert(isPresented: $hasErrorCreatingDirectoryThrown) {
+            Alert(
+                title: Text("Saving images error"),
+                message: Text("There was an error saving images on your Mac. Please try again or relaunch the app."),
+                dismissButton: .default(Text("Continue"))
+            )
+        }
     }
 }
 
@@ -85,15 +127,18 @@ extension EditorView {
             }
             downloadImagesOnComputer(images)
         } label: {
-            Image(systemName: "arrow.down.circle.fill")
-                .font(.title2)
-                .foregroundStyle(.black)
-                .fontWeight(.heavy)
-                .frame(width: 60, height: 60)
-                .background {
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(.yellow)
-                }
+            HStack(spacing: 8) {
+                Image(systemName: "arrow.down.circle.fill")
+                Text("Download")
+            }
+            .font(.title2)
+            .foregroundStyle(.black)
+            .fontWeight(.heavy)
+            .frame(width: 160, height: 55)
+            .background {
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(.yellow)
+            }
         }
         .buttonStyle(.plain)
     }
@@ -126,6 +171,7 @@ extension EditorView {
                     process.waitUntilExit()
                     try fileManager.removeItem(at: tempDirectory)
                 } catch {
+                    hasErrorCreatingDirectoryThrown.toggle()
                     return
                 }
             }
@@ -151,7 +197,10 @@ extension EditorView {
             origin: .zero,
             size: size
         )
-        guard let bitmapRep = hostingViewController.bitmapImageRepForCachingDisplay(in: hostingViewController.bounds) else { return NSImage() }
+        guard let bitmapRep = hostingViewController.bitmapImageRepForCachingDisplay(in: hostingViewController.bounds) else {
+            hasErrorRenderingImageThrown.toggle()
+            return NSImage()
+        }
         hostingViewController.cacheDisplay(in: hostingViewController.bounds, to: bitmapRep)
         
         let image = NSImage(size: size)
