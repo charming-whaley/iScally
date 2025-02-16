@@ -18,4 +18,4 @@ https://github.com/charming-whaley/iScally.git
 
 Clone this repo to XCode and run it on your Mac. Process of creating icons is very smooth: just choose how you prefer to see your new icon and tap download button at the bottom of the editor
 
-![newscreen](https://github.com/user-attachments/assets/6eb4df7b-a2ca-4eb7-a80d-97eacd0374d4)
+![screen](https://github.com/user-attachments/assets/5c50f83b-de01-4e15-819d-ee545bcbc357)
