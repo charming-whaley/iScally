@@ -100,7 +100,7 @@ public struct BackgroundSelectorView: View {
                     .font(.headline)
                     .foregroundStyle(.white)
                     .padding(.vertical, 12)
-                    .frame(width: window * 0.55)
+                    .frame(width: window * 0.527)
                     .background {
                         RoundedRectangle(cornerRadius: 15)
                             .fill(.editorBackground)
