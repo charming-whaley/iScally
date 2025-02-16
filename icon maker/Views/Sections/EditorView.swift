@@ -15,6 +15,8 @@ public struct EditorView: View {
     private var hasErrorRenderingImageThrown: Bool = false
     @State
     private var hasErrorCreatingDirectoryThrown: Bool = false
+    @State
+    private var keyDownMonitor: Any?
     
     public var body: some View {
         VStack {
@@ -88,6 +90,21 @@ public struct EditorView: View {
                 dismissButton: .default(Text("Continue"))
             )
         }
+        .onAppear {
+            keyDownMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { event in
+                if event.modifierFlags.contains(.command), event.charactersIgnoringModifiers?.lowercased() == "s" {
+                    performDownloadAction()
+                    return nil
+                }
+                return event
+            })
+        }
+        .onDisappear {
+            if let monitor = keyDownMonitor {
+                NSEvent.removeMonitor(monitor)
+                keyDownMonitor = nil
+            }
+        }
     }
 }
 
@@ -95,37 +112,7 @@ extension EditorView {
     @ViewBuilder
     private func DownloadButtonView() -> some View {
         Button {
-            var images = [NSImage]()
-            if contentViewModel.hasWatchOSSupport && !contentViewModel.hasMacOSSupport {
-                images = (Contents.extendedImageSizesWatchOS).map { size in
-                    renderIconFieldViewAsNSImage(
-                        withWidth: size.width,
-                        AndHeight: size.height
-                    )
-                }
-            } else if !contentViewModel.hasWatchOSSupport && contentViewModel.hasMacOSSupport {
-                images = (Contents.extendedImageSizesMacOS).map { size in
-                    renderIconFieldViewAsNSImage(
-                        withWidth: size.width,
-                        AndHeight: size.height
-                    )
-                }
-            } else if contentViewModel.hasWatchOSSupport && contentViewModel.hasMacOSSupport {
-                images = (Contents.extendedImageSizes).map { size in
-                    renderIconFieldViewAsNSImage(
-                        withWidth: size.width,
-                        AndHeight: size.height
-                    )
-                }
-            } else {
-                images = (Contents.standardImageSizes).map { size in
-                    renderIconFieldViewAsNSImage(
-                        withWidth: size.width,
-                        AndHeight: size.height
-                    )
-                }
-            }
-            downloadImagesOnComputer(images)
+            performDownloadAction()
         } label: {
             HStack(spacing: 8) {
                 Image(systemName: "arrow.down.circle.fill")
@@ -141,6 +128,40 @@ extension EditorView {
             }
         }
         .buttonStyle(.plain)
+    }
+    
+    private func performDownloadAction() {
+        var images = [NSImage]()
+        if contentViewModel.hasWatchOSSupport && !contentViewModel.hasMacOSSupport {
+            images = (Contents.extendedImageSizesWatchOS).map { size in
+                renderIconFieldViewAsNSImage(
+                    withWidth: size.width,
+                    AndHeight: size.height
+                )
+            }
+        } else if !contentViewModel.hasWatchOSSupport && contentViewModel.hasMacOSSupport {
+            images = (Contents.extendedImageSizesMacOS).map { size in
+                renderIconFieldViewAsNSImage(
+                    withWidth: size.width,
+                    AndHeight: size.height
+                )
+            }
+        } else if contentViewModel.hasWatchOSSupport && contentViewModel.hasMacOSSupport {
+            images = (Contents.extendedImageSizes).map { size in
+                renderIconFieldViewAsNSImage(
+                    withWidth: size.width,
+                    AndHeight: size.height
+                )
+            }
+        } else {
+            images = (Contents.standardImageSizes).map { size in
+                renderIconFieldViewAsNSImage(
+                    withWidth: size.width,
+                    AndHeight: size.height
+                )
+            }
+        }
+        downloadImagesOnComputer(images)
     }
     
     private func downloadImagesOnComputer(_ images: [NSImage]) {

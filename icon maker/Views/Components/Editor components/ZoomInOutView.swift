@@ -1,4 +1,5 @@
 import SwiftUI
+import AppKit
 
 public struct ZoomInOutView: View {
     @Binding
@@ -7,6 +8,8 @@ public struct ZoomInOutView: View {
     private var minimumScale: CGFloat = 0.7
     @State
     private var maximumScale: CGFloat = 1.5
+    @State
+    private var keyDownMonitor: Any?
     
     public var body: some View {
         HStack(spacing: 10) {
@@ -54,6 +57,29 @@ public struct ZoomInOutView: View {
                     }
             }
             .buttonStyle(.plain)
+        }
+        .onAppear {
+            keyDownMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { event in
+                if event.modifierFlags.contains(.command), event.charactersIgnoringModifiers == "=" {
+                    scale = min(maximumScale, scale + 0.1)
+                    return nil
+                }
+                if event.modifierFlags.contains(.command), event.charactersIgnoringModifiers == "-" {
+                    scale = max(minimumScale, scale - 0.1)
+                    return nil
+                }
+                if event.modifierFlags.contains(.command), event.charactersIgnoringModifiers == "/" {
+                    scale = 1.0
+                    return nil
+                }
+                return event
+            })
+        }
+        .onDisappear {
+            if let monitor = keyDownMonitor {
+                NSEvent.removeMonitor(monitor)
+                keyDownMonitor = nil
+            }
         }
     }
 }
