@@ -17,4 +17,6 @@ final class ContentViewModel: ObservableObject {
     var hasWatchOSSupport: Bool = false
     @Published
     var hasMacOSSupport: Bool = false
+    @Published
+    var customColorTint: Color = .yellow
 }

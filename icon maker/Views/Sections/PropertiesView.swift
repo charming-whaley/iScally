@@ -14,11 +14,11 @@ public struct PropertiesView: View {
             CustomSegmentedControlView(
                 panels: Panel.allCases,
                 activePanel: $activePanel,
-                activeTint: .black,
+                activeTint: contentViewModel.customColorTint == .yellow ? .black : .white,
                 inActiveTint: Color.secondary.opacity(0.7)
             ) { size in
                 Capsule()
-                    .fill(Color.yellow)
+                    .fill(contentViewModel.customColorTint)
                     .frame(height: size.height)
                     .padding(.horizontal, 0)
                     .frame(maxWidth: .infinity, alignment: .bottom)
@@ -62,7 +62,8 @@ public struct PropertiesView: View {
             BackgroundPropertiesView(
                 currentColor: $contentViewModel.originalColor,
                 customColor: $contentViewModel.customColor,
-                hasGradient: $contentViewModel.hasGradient
+                hasGradient: $contentViewModel.hasGradient,
+                tintColor: $contentViewModel.customColorTint
             )
         case .icon:
             TopLayerPickerView(
@@ -73,7 +74,8 @@ public struct PropertiesView: View {
             PreferencesView(
                 filename: $contentViewModel.filename,
                 hasWatchOSSupport: $contentViewModel.hasWatchOSSupport,
-                hasMacOSSupport: $contentViewModel.hasMacOSSupport
+                hasMacOSSupport: $contentViewModel.hasMacOSSupport,
+                colorScheme: $contentViewModel.customColorTint
             )
         }
     }

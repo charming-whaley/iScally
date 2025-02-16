@@ -63,16 +63,14 @@ public struct EditorView: View {
         .background(BlurLayer())
         .ignoresSafeArea()
         .onChange(of: scale) { oldValue, newValue in
-            if newValue < 1.0 || newValue > 1.0 || oldValue < 1.0 || oldValue > 1.0 {
-                withAnimation(.easeIn) {
+            withAnimation(.easeIn) {
+                hasZoomAppeared.toggle()
+            }
+            
+            Task { @MainActor in
+                try? await Task.sleep(for: .seconds(0.9))
+                withAnimation(.easeOut) {
                     hasZoomAppeared.toggle()
-                }
-                
-                Task { @MainActor in
-                    try? await Task.sleep(for: .seconds(0.9))
-                    withAnimation(.easeOut) {
-                        hasZoomAppeared.toggle()
-                    }
                 }
             }
         }
@@ -119,12 +117,12 @@ extension EditorView {
                 Text("Download")
             }
             .font(.title2)
-            .foregroundStyle(.black)
+            .foregroundStyle(contentViewModel.customColorTint == .yellow ? .black : .white)
             .fontWeight(.heavy)
             .frame(width: 160, height: 55)
             .background {
                 RoundedRectangle(cornerRadius: 20)
-                    .fill(.yellow)
+                    .fill(contentViewModel.customColorTint)
             }
         }
         .buttonStyle(.plain)

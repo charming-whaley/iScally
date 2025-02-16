@@ -12,6 +12,8 @@ public struct BackgroundPropertiesView: View {
     private var showErrorAlert = false
     @State
     private var wentToFullScreenMode: Bool = false
+    @Binding
+    var tintColor: Color
     
     public var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -22,7 +24,7 @@ public struct BackgroundPropertiesView: View {
                 .padding(.horizontal, 19)
                 .padding(.bottom, 14)
             
-            CustomToggleView(switcher: $hasGradient, title: "Add gradient")
+            CustomToggleView(switcher: $hasGradient, title: "Add gradient", tintColor: $tintColor)
                 .padding(.horizontal, 19)
                 .padding(.bottom, 15)
              
@@ -118,12 +120,12 @@ public struct BackgroundPropertiesView: View {
                     Image(systemName: "paintbrush.pointed.fill")
                         .font(.headline)
                         .fontWeight(.heavy)
-                        .foregroundStyle(.black)
+                        .foregroundStyle(tintColor == .yellow ? .black : .white)
                         .padding(.vertical, 10)
                         .frame(width: window * 0.20)
                         .background {
                             RoundedRectangle(cornerRadius: 15)
-                                .fill(Color.yellow)
+                                .fill(tintColor)
                         }
                 }
                 .buttonStyle(.plain)
@@ -140,12 +142,12 @@ public struct BackgroundPropertiesView: View {
                     Image(systemName: "paintpalette.fill")
                         .font(.headline)
                         .fontWeight(.heavy)
-                        .foregroundStyle(.black)
+                        .foregroundStyle(tintColor == .yellow ? .black : .white)
                         .padding(.vertical, 10)
                         .frame(width: window * 0.20)
                         .background {
                             RoundedRectangle(cornerRadius: 15)
-                                .fill(Color.yellow)
+                                .fill(tintColor)
                         }
                 }
                 .buttonStyle(.plain)

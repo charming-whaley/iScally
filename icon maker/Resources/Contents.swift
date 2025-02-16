@@ -17,6 +17,14 @@ public struct Contents {
     static let columns = Array(repeating: GridItem(.fixed(130), spacing: 16), count: 2)
     static let flexibleColumns = Array(repeating: GridItem(.fixed(130), spacing: 16), count: 4)
     
+    static let standardColorSchemes: [CustomPalette] = [
+        .init(customColor: .standardAppGreen),
+        .init(customColor: .yellow),
+        .init(customColor: .red),
+        .init(customColor: .standardAppBlue),
+        .init(customColor: .standardPurple)
+    ]
+    
     static let standardImageSizes: [ImageSize] = [
         .init(width: 40, height: 40),
         .init(width: 58, height: 58),

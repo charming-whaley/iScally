@@ -26,5 +26,6 @@ public struct RootView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+        .preferredColorScheme(.dark)
     }
 }
