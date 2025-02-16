@@ -6,7 +6,7 @@ final class ContentViewModel: ObservableObject {
     @Published 
     var customColor = ""
     @Published
-    var originalColor: Color = Contents.backgroundColors.first!
+    var originalColor: Color = Contents.backgroundColors.first!.customColor
     @Published
     var currentSymbol: String = Contents.icons.first!
     @Published

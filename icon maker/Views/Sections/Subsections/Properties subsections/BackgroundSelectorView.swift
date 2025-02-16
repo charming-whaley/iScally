@@ -27,19 +27,18 @@ public struct BackgroundSelectorView: View {
                 .padding(.bottom, 15)
              
             CustomColorBlockView()
-                .padding(.bottom, 8)
             
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVGrid(columns: wentToFullScreenMode ? Contents.flexibleColumns : Contents.columns, spacing: 16) {
-                    ForEach(Contents.backgroundColors, id: \.self) { background in
-                        BackgroundSelectorBoxView(background)
+                    ForEach(Contents.backgroundColors) { background in
+                        BackgroundSelectorBoxView(background.customColor)
                             .onTapGesture {
                                 withAnimation(.snappy(duration: 0.25, extraBounce: 0)) {
-                                    currentColor = background
+                                    currentColor = background.customColor
                                 }
                             }
                             .overlay {
-                                if currentColor == background && customColor.isEmpty {
+                                if currentColor == background.customColor && customColor.isEmpty {
                                     RoundedRectangle(cornerRadius: 20)
                                         .fill(.clear)
                                         .stroke(.white, lineWidth: 2)
@@ -91,40 +90,68 @@ public struct BackgroundSelectorView: View {
     
     @ViewBuilder
     private func CustomColorBlockView() -> some View {
-        HStack(spacing: 8) {
-            TextField("Your hex color...", text: $customColor)
-                .textFieldStyle(.plain)
-                .padding(.horizontal)
-                .font(.headline)
-                .foregroundStyle(.white)
-                .padding(.vertical, 12)
-                .frame(maxWidth: .infinity)
-                .background {
-                    RoundedRectangle(cornerRadius: 15)
-                        .fill(.editorBackground)
-                }
+        GeometryReader {
+            let window = $0.size.width
             
-            Button {
-                if let customColorHex = Color(hex: customColor) {
-                    currentColor = customColorHex
-                } else {
-                    showErrorAlert.toggle()
-                }
-            } label: {
-                Image(systemName: "paintbrush.pointed.fill")
+            HStack(spacing: 8) {
+                TextField("Your hex color...", text: $customColor)
+                    .textFieldStyle(.plain)
+                    .padding(.horizontal)
                     .font(.headline)
-                    .fontWeight(.heavy)
-                    .foregroundStyle(.black)
-                    .padding(.vertical, 10)
-                    .frame(width: 60)
+                    .foregroundStyle(.white)
+                    .padding(.vertical, 12)
+                    .frame(width: window * 0.55)
                     .background {
                         RoundedRectangle(cornerRadius: 15)
-                            .fill(Color.yellow)
+                            .fill(.editorBackground)
                     }
+                
+                Button {
+                    if let customColorHex = Color(hex: customColor) {
+                        currentColor = customColorHex
+                    } else {
+                        showErrorAlert.toggle()
+                    }
+                    
+                    customColor = ""
+                } label: {
+                    Image(systemName: "paintbrush.pointed.fill")
+                        .font(.headline)
+                        .fontWeight(.heavy)
+                        .foregroundStyle(.black)
+                        .padding(.vertical, 10)
+                        .frame(width: window * 0.20)
+                        .background {
+                            RoundedRectangle(cornerRadius: 15)
+                                .fill(Color.yellow)
+                        }
+                }
+                .buttonStyle(.plain)
+                
+                Button {
+                    if let customColorHex = Color(hex: customColor) {
+                        Contents.backgroundColors.append(.init(customColor: customColorHex))
+                    } else {
+                        showErrorAlert.toggle()
+                    }
+                    
+                    customColor = ""
+                } label: {
+                    Image(systemName: "paintpalette.fill")
+                        .font(.headline)
+                        .fontWeight(.heavy)
+                        .foregroundStyle(.black)
+                        .padding(.vertical, 10)
+                        .frame(width: window * 0.20)
+                        .background {
+                            RoundedRectangle(cornerRadius: 15)
+                                .fill(Color.yellow)
+                        }
+                }
+                .buttonStyle(.plain)
             }
-            .buttonStyle(.plain)
         }
+        .frame(height: 57)
         .padding(.horizontal, 19)
-        .padding(.bottom, 8)
     }
 }

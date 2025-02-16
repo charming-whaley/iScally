@@ -1,10 +1,13 @@
 import SwiftUI
+import AppKit
 
 public struct IconPickerView: View {
     @Binding
     var symbol: String
     @Binding
     var symbolColor: Color
+    @State
+    private var wentToFullScreenMode: Bool = false
     
     public var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -19,7 +22,7 @@ public struct IconPickerView: View {
                 .padding(.bottom, 16)
             
             ScrollView(.vertical, showsIndicators: false) {
-                LazyVGrid(columns: Contents.columns, spacing: 16) {
+                LazyVGrid(columns: wentToFullScreenMode ? Contents.flexibleColumns : Contents.columns, spacing: 16) {
                     ForEach(Contents.icons, id: \.self) { icon in
                         IconBoxView(iconName: icon)
                             .onTapGesture {
@@ -49,6 +52,26 @@ public struct IconPickerView: View {
             .ignoresSafeArea()
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+        .onAppear {
+            if let window = NSApplication.shared.windows.first {
+                wentToFullScreenMode = window.styleMask.contains(.fullScreen)
+            }
+            
+            NotificationCenter.default.addObserver(
+                forName: NSWindow.willEnterFullScreenNotification,
+                object: nil,
+                queue: .main
+            ) { _ in
+                wentToFullScreenMode = true
+            }
+            NotificationCenter.default.addObserver(
+                forName: NSWindow.willExitFullScreenNotification,
+                object: nil,
+                queue: .main
+            ) { _ in
+                wentToFullScreenMode = false
+            }
+        }
     }
     
     @ViewBuilder
