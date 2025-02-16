@@ -1,7 +1,7 @@
 import SwiftUI
 import AppKit
 
-public struct IconFieldView: View {
+public struct FieldView: View {
     @Binding
     var backgroundColor: Color
     @Binding

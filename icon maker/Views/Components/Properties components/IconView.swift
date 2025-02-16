@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct IconBoxView: View {
+public struct IconView: View {
     let iconName: String
     
     public var body: some View {

@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct CustomPanel: Identifiable {
+public struct CustomPalette: Identifiable {
     public let id = UUID().uuidString
     var customColor: Color
 }

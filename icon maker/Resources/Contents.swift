@@ -1,7 +1,7 @@
 import SwiftUI
 
 public struct Contents {
-    static var backgroundColors: [CustomPanel] = [
+    static var backgroundColors: [CustomPalette] = [
         .init(customColor: .standardAppAnotherOrange), .init(customColor: .standardAppBlack), .init(customColor: .standardAppBlue), .init(customColor: .standardAppCyan), .init(customColor: .standardAppDarkPink), .init(customColor: .standardAppGray), .init(customColor: .standardAppGreen), .init(customColor: .standardAppIndigo), .init(customColor: .standardAppLightIndigo), .init(customColor: .standardAppLightMint), .init(customColor: .standardAppLightPink), .init(customColor: .standardAppOrange), .init(customColor: .standardAppPaletteBlue), .init(customColor: .standardAppPink), .init(customColor: .standardAppRed), .init(customColor: .standardAppSalad), .init(customColor: .standardAppSea), .init(customColor: .standardAppYellow), .init(customColor: .standardPurple)
     ].reversed()
     

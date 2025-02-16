@@ -59,18 +59,18 @@ public struct PropertiesView: View {
     private func PanelView() -> some View {
         switch activePanel {
         case .backgroundColor:
-            BackgroundSelectorView(
+            BackgroundPropertiesView(
                 currentColor: $contentViewModel.originalColor,
                 customColor: $contentViewModel.customColor,
                 hasGradient: $contentViewModel.hasGradient
             )
         case .icon:
-            IconPickerView(
+            TopLayerPickerView(
                 symbol: $contentViewModel.currentSymbol,
                 symbolColor: $contentViewModel.symbolColor
             )
         case .others:
-            ImagePropertiesView(
+            PreferencesView(
                 filename: $contentViewModel.filename,
                 hasWatchOSSupport: $contentViewModel.hasWatchOSSupport,
                 hasMacOSSupport: $contentViewModel.hasMacOSSupport

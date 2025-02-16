@@ -1,7 +1,7 @@
 import SwiftUI
 import AppKit
 
-public struct IconPickerView: View {
+public struct TopLayerPickerView: View {
     @Binding
     var symbol: String
     @Binding
@@ -24,7 +24,7 @@ public struct IconPickerView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVGrid(columns: wentToFullScreenMode ? Contents.flexibleColumns : Contents.columns, spacing: 16) {
                     ForEach(Contents.icons, id: \.self) { icon in
-                        IconBoxView(iconName: icon)
+                        IconView(iconName: icon)
                             .onTapGesture {
                                 withAnimation(.snappy(duration: 0.25, extraBounce: 0)) {
                                     symbol = icon

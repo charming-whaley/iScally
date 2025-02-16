@@ -1,7 +1,7 @@
 import SwiftUI
 import AppKit
 
-public struct ZoomInOutView: View {
+public struct ZoomView: View {
     @Binding
     var scale: CGFloat
     @State
@@ -85,5 +85,5 @@ public struct ZoomInOutView: View {
 }
 
 #Preview {
-    ZoomInOutView(scale: .constant(1.0))
+    ZoomView(scale: .constant(1.0))
 }

@@ -1,7 +1,7 @@
 import SwiftUI
 import Combine
 
-public struct BackgroundSelectorView: View {
+public struct BackgroundPropertiesView: View {
     @Binding
     var currentColor: Color
     @Binding
@@ -31,7 +31,7 @@ public struct BackgroundSelectorView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVGrid(columns: wentToFullScreenMode ? Contents.flexibleColumns : Contents.columns, spacing: 16) {
                     ForEach(Contents.backgroundColors) { background in
-                        BackgroundSelectorBoxView(background.customColor)
+                        CustomPaletteBoxView(background.customColor)
                             .onTapGesture {
                                 withAnimation(.snappy(duration: 0.25, extraBounce: 0)) {
                                     currentColor = background.customColor

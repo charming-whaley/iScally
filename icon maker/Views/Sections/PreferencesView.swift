@@ -1,6 +1,6 @@
 import SwiftUI
  
-public struct ImagePropertiesView: View {
+public struct PreferencesView: View {
     @Binding
     var filename: String
     @Binding

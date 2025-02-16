@@ -23,7 +23,7 @@ public struct EditorView: View {
             Spacer(minLength: 0)
             
             HStack {
-                IconFieldView(
+                FieldView(
                     backgroundColor: $contentViewModel.originalColor,
                     hasGradient: $contentViewModel.hasGradient,
                     imageName: $contentViewModel.currentSymbol,
@@ -46,7 +46,7 @@ public struct EditorView: View {
             Spacer(minLength: 0)
             
             HStack(spacing: 10) {
-                ZoomInOutView(scale: $scale)
+                ZoomView(scale: $scale)
                 Spacer(minLength: 0)
                 DownloadButtonView()
             }
@@ -60,7 +60,7 @@ public struct EditorView: View {
                 .aspectRatio(contentMode: .fill)
                 .opacity(0.3)
         }
-        .background(Color("EditorBackgroundColor"))
+        .background(BlurLayer())
         .ignoresSafeArea()
         .onChange(of: scale) { oldValue, newValue in
             if newValue < 1.0 || newValue > 1.0 || oldValue < 1.0 || oldValue > 1.0 {
@@ -200,7 +200,7 @@ extension EditorView {
     }
     
     private func renderIconFieldViewAsNSImage(withWidth width: CGFloat, AndHeight height: CGFloat) -> NSImage {
-        let hostingViewController = NSHostingView(rootView: IconFieldView(
+        let hostingViewController = NSHostingView(rootView: FieldView(
             backgroundColor: $contentViewModel.originalColor,
             hasGradient: $contentViewModel.hasGradient,
             imageName: $contentViewModel.currentSymbol,
