@@ -1,0 +1,15 @@
+"button.download.label" = "Скачать";
+
+// Properties
+"properties.background.label" = "Фон";
+"properties.background.addGradient.label" = "Добавить градиент";
+"properties.background.field.hint" = "HEX код";
+"properties.topLayer.label" = "Верхний слой";
+"properties.tint.text" = "Цвет слоя";
+"properties.preferences.label" = "Настройки";
+"properties.firstSection.label" = "Кастомизация";
+"properties.thirdSection.label" = "Настройки экспорта";
+"properties.thirdSection.field.hint" = "Имя файла";
+"properties.thirdSection.field.originalName" = "Новое изображение";
+"properties.thirdSection.firstCheckBox.label" = "Добавить размеры для macOS";
+"properties.thirdSection.secondCheckBox.label" = "Добавить размеры для watchOS";

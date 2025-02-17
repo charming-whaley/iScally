@@ -17,14 +17,18 @@ public struct BackgroundPropertiesView: View {
     
     public var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("Background")
+            Text(String(localized: "properties.background.label"))
                 .font(.largeTitle)
                 .fontWeight(.black)
                 .foregroundStyle(.white)
                 .padding(.horizontal, 19)
                 .padding(.bottom, 14)
             
-            CustomToggleView(switcher: $hasGradient, title: "Add gradient", tintColor: $tintColor)
+            CustomToggleView(
+                switcher: $hasGradient,
+                title: String(localized: "properties.background.addGradient.label"),
+                tintColor: $tintColor
+            )
                 .padding(.horizontal, 19)
                 .padding(.bottom, 15)
              
@@ -96,7 +100,7 @@ public struct BackgroundPropertiesView: View {
             let window = $0.size.width
             
             HStack(spacing: 8) {
-                TextField("Your hex color...", text: $customColor)
+                TextField(String(localized: "properties.background.field.hint"), text: $customColor)
                     .textFieldStyle(.plain)
                     .padding(.horizontal)
                     .font(.headline)

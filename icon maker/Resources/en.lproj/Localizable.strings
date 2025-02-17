@@ -1,0 +1,15 @@
+"button.download.label" = "Export";
+
+// Properties
+"properties.background.label" = "Background";
+"properties.background.addGradient.label" = "Add gradient";
+"properties.background.field.hint" = "HEX color";
+"properties.topLayer.label" = "Top Layer";
+"properties.tint.text" = "Layer color";
+"properties.preferences.label" = "Preferences";
+"properties.firstSection.label" = "Styling";
+"properties.thirdSection.label" = "Export properties";
+"properties.thirdSection.field.hint" = "File name";
+"properties.thirdSection.field.originalName" = "New image";
+"properties.thirdSection.firstCheckBox.label" = "Add macOS sizes";
+"properties.thirdSection.secondCheckBox.label" = "Add watchOS sizes";

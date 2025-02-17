@@ -17,6 +17,11 @@ public struct Contents {
     static let columns = Array(repeating: GridItem(.fixed(130), spacing: 16), count: 2)
     static let flexibleColumns = Array(repeating: GridItem(.fixed(130), spacing: 16), count: 4)
     
+    static let translationLanguages: [(String, String)] = [
+        ("English", "en"),
+        ("Russian", "ru")
+    ]
+    
     static let standardColorSchemes: [CustomPalette] = [
         .init(customColor: .standardAppGreen),
         .init(customColor: .yellow),

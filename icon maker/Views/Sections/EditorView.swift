@@ -114,7 +114,7 @@ extension EditorView {
         } label: {
             HStack(spacing: 8) {
                 Image(systemName: "arrow.down.circle.fill")
-                Text("Download")
+                Text(String(localized: "button.download.label"))
             }
             .font(.title2)
             .foregroundStyle(contentViewModel.customColorTint == .yellow ? .black : .white)

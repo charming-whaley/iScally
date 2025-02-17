@@ -12,7 +12,7 @@ final class ContentViewModel: ObservableObject {
     @Published
     var symbolColor: Color = .white
     @Published 
-    var filename: String = "New image"
+    var filename: String = String(localized: "properties.thirdSection.field.originalName")
     @Published
     var hasWatchOSSupport: Bool = false
     @Published

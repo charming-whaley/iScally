@@ -11,7 +11,7 @@ public struct TopLayerPickerView: View {
     
     public var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("Top Layer")
+            Text(String(localized: "properties.topLayer.label"))
                 .font(.largeTitle)
                 .fontWeight(.black)
                 .foregroundStyle(.white)
@@ -77,7 +77,7 @@ public struct TopLayerPickerView: View {
     @ViewBuilder
     private func IconBackgroundSelector() -> some View {
         HStack(spacing: 0) {
-            Text("Tint color: ")
+            Text(String(localized: "properties.tint.text"))
                 .font(.system(size: 14))
             
             Spacer(minLength: 0)

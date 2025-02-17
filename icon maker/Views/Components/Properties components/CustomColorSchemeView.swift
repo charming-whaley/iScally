@@ -9,6 +9,7 @@ public struct CustomColorSchemeView: View {
             ForEach(Contents.standardColorSchemes) { scheme in
                 Rectangle()
                     .fill(scheme.customColor)
+                    .frame(maxWidth: .infinity)
                     .onTapGesture {
                         withAnimation(.easeInOut(duration: 0.2)) {
                             colorScheme = scheme.customColor
